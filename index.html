@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Voice Shopping Assistant</title>
+</head>
+<body>
+  <h1>Welcome to Voice Shopping Assistant</h1>
+  <button onclick="startListening()">Speak</button>
+  <p id="output"></p>
+
+  <script>
+    function startListening() {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.onresult = function(event) {
+        const command = event.results[0][0].transcript;
+        document.getElementById('output').innerText = "You said: " + command;
+        if (command.toLowerCase().includes("amazon")) {
+          window.open("https://www.amazon.in", "_blank");
+        } else if (command.toLowerCase().includes("youtube")) {
+          window.open("https://www.youtube.com", "_blank");
+        }
+      };
+      recognition.start();
+    }
+  </script>
+</body>
+</html>
